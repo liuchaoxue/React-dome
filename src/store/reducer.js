@@ -1,40 +1,19 @@
-import {CHANGE_INPUT,ADD_ITEM,DEL_ITEM,GET_LIST} from './actionTypes'
-
-const defaultState = {
-    placeholder:'write',
-    inputVal:'',
-    list:[]
+const defaultState ={
+    inputVal:'123',
+    list:['1','2']
 }
 
+export default (state=defaultState,action)=>{
 
-
-export default (state = defaultState,acticon)=>{
-
-
-    // Reducer 只能接受state，不能改变state 
-    if(acticon.type===CHANGE_INPUT){
+    if(action.type === 'changeInput'){
         let newState = JSON.parse(JSON.stringify(state))
-        newState.inputVal = acticon.value
+        newState.inputVal = action.value
         return newState
     }
 
-    if(acticon.type === ADD_ITEM){
+    if(action.type === 'addList'){
         let newState = JSON.parse(JSON.stringify(state))
         newState.list.push(newState.inputVal)
-        newState.inputVal = ''
-        return newState
-    }
-
-    if(acticon.type === DEL_ITEM){
-        let newState = JSON.parse(JSON.stringify(state))
-        newState.list.splice(acticon.index,1)
-        return newState
-    }
-
-    if(acticon.type === GET_LIST){
-        let newState = JSON.parse(JSON.stringify(state))
-        newState.list = acticon.data.data.list
-        console.log(acticon)
         return newState
     }
 
